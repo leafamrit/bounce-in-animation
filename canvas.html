@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Text Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const texts = [
+            { text: 'SUMMER SALE!', size: 50, delay: 0, direction: 'up' },
+            { text: 'Now 25% Off Until September 22nd.', size: 40, delay: 0.2, direction: 'down' },
+            // { text: 'This is some paragraph text that has multiple lines.', size: 18, delay: 0.4, direction: 'up' },
+            // { text: 'It also has multiple sentences in it, which allow it to take up more space than a simple heading or subheading.', size: 18, delay: 0.6, direction: 'up' }
+        ];
+
+        function drawText(text, size, x, y) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = `${size}px Arial, Helvetica, sans-serif`;
+            ctx.fillStyle = 'black';
+            ctx.textAlign = 'center';
+            ctx.fillText(text, x, y);
+        }
+
+        function animateText(textObj) {
+            const startY = textObj.direction === 'up' ? canvas.height : 0;
+            const endY = textObj.direction === 'up' ? 0 : canvas.height;
+            let currentTime = 0;
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const yPos = ease(currentTime, startY, endY - startY, 1);
+                drawText(textObj.text, textObj.size, canvas.width / 2, yPos);
+                currentTime += 0.02;
+                if (currentTime < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            setTimeout(() => {
+                animate();
+            }, textObj.delay * 1000);
+        }
+
+        function ease(t, b, c, d) {
+            t /= d;
+            return c * t * t + b;
+        }
+
+        texts.forEach(textObj => {
+            animateText(textObj);
+        });
+    </script>
+</body>
+</html>

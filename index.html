@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+    <title>Canvas Text Animation</title>
+    <style>
+        :root {
+            --anim-duration: 0.7s;
+            --anim-timing-fn: cubic-bezier(0.01, -1.03, 0, 0.32);
+        }
+
+        .emerge {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .flexbox {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .upwards {
+            opacity: 0;
+            animation: pullup var(--anim-duration) var(--anim-timing-fn) forwards;
+        }
+
+        .downwards {
+            opacity: 0;
+            animation: pulldown var(--anim-duration) var(--anim-timing-fn) forwards;
+        }
+
+        .leftwards {
+            opacity: 0;
+            animation: pullleft var(--anim-duration) var(--anim-timing-fn) forwards;
+        }
+
+        .rightwards {
+            opacity: 0;
+            animation: pullright var(--anim-duration) var(--anim-timing-fn) forwards;
+        }
+
+        .delay-0 {
+            animation-delay: calc(var(--anim-duration) * 0.2);
+        }
+
+        .delay-1 {
+            animation-delay: calc(var(--anim-duration) * 0.4);
+        }
+
+        .delay-2 {
+            animation-delay: calc(var(--anim-duration) * 0.6);
+        }
+
+        .delay-3 {
+            animation-delay: calc(var(--anim-duration) * 0.8);
+        }
+
+        .header-1 {
+            font-size: 50px;
+        }
+
+        .header-2 {
+            font-size: 40px;
+        }
+
+        .text {
+            font-size: 18px;
+        }
+
+        @keyframes pullup {
+            0% {
+                transform: rotateX(90deg) translate3d(0em, 0.8em, -0.8em) scale3d(0.8, 0.9, 0.9);
+                opacity: 0;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotateX(0deg) translate3d(0, 0, 0) scale3d(1, 1, 1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulldown {
+            0% {
+                transform: rotateX(-90deg) translate3d(0em, -0.8em, -0.8em) scale3d(0.8, 0.9, 0.9);
+                opacity: 0;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotateX(0deg) translate3d(0, 0, 0) scale3d(1, 1, 1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pullleft {
+            0% {
+                transform: rotateY(-90deg) translate3d(0.8em, 0, -0.8em) scale3d(0.9, 0.8, 0.9);
+                opacity: 0;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotateY(0deg) translate3d(0, 0, 0) scale3d(1, 1, 1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pullright {
+            0% {
+                transform: rotateY(90deg) translate3d(-0.8em, 0, -0.8em) scale3d(0.9, 0.8, 0.9);
+                opacity: 0;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotateY(0deg) translate3d(0, 0, 0) scale3d(1, 1, 1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <p class="emerge upwards header-1">SUMMER SALE!</p>
+    <p class="emerge downwards delay-0 header-2">Now 25% Off Until September 22nd.</p>
+    <p class="emerge upwards delay-1 text">This is some paragraph text that has multiple lines.</p>
+    <p class="emerge upwards delay-2 text">It also has multiple sentences in it, which allow it to take up more space than a simple heading or subheading.</p>
+    <div class="flexbox">
+        <div class="emerge rightwards delay-3 header-1">→</div>
+        <div class="emerge leftwards delay-3 header-1">←</div>
+    </div>
+</body>
+
+</html>
